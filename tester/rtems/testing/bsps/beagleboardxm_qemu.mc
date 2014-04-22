@@ -1,5 +1,5 @@
 # RTEMS Tools Project (http://www.rtems.org/)
-# Copyright 2010-2014 Chris Johns (chrisj@rtems.org)
+# Copyright 2010-2014 Ben Gras (beng@shrike-systems.com)
 # All rights reserved.
 #
 # This file is part of the RTEMS Tools package in 'rtems-tools'.
@@ -40,26 +40,10 @@
 #   value    : 'single line', '''multi line'''
 #
 
-#
-# The BeagleBoard xM board connected via OpenOCD and a JTAG pod. The console
-# is connected to a tty device. The BeagleBoard xM BSP contains an OpenOCD
-# configuration file called bbxm.cfg you need to start OpenOCD with.
-#
 [global]
-bsp:                      none,    none,   'beagleboardxm'
-jobs:                     none,    none,   '1'
+bsp:                          none,    none,   'beagleboardxm'
 
 [beagleboardxm]
-beagleboardxm:            none,    none,   '%{_rtscripts}/gdb.cfg'
+beagleboardxm:       none,    none,     '%{_rtscripts}/run.cfg'
 beagleboardxm_arch:       none,    none,   'arm'
-bsp_tty_dev:                  none,    none,   '/dev/ttyUSB0'
-gdb_script:                   none,    none,   'beagleboardxm_gdb_script'
-beagleboardxm_gdb_script: none,    none,   '''
-                                                target remote localhost:3333
-                                                mon reset halt
-                                                mon beagleboard_xm_init
-                                                load
-                                                break bsp_reset
-                                                break _exit
-                                                break _Terminate_CPU_Fatal_halt
-                                                continue'''
+bsp_run_cmd:               none,    none,     'sh -x %{_rtscripts}/bootbbxm.sh %{rtems_tools}'
