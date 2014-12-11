@@ -46,4 +46,4 @@ bsp:                          none,    none,   'beagleboardxm'
 [beagleboardxm]
 beagleboardxm:       none,    none,     '%{_rtscripts}/run.cfg'
 beagleboardxm_arch:       none,    none,   'arm'
-bsp_run_cmd:               none,    none,     'sh -x %{_rtscripts}/bootbbxm.sh %{rtems_tools}'
+bsp_run_cmd:               none,    none,     'python %{_rtscripts}/bootbbxm.py %{rtems_tools}'
