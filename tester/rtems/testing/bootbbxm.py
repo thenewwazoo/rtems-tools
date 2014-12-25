@@ -19,6 +19,7 @@ def parseargs():
     parser.add_argument("-b", "--bsize", type=int, default=512, help="Size of disk img block size in bytes")
     parser.add_argument("-s", "--imgsize", type=int, default=30, help="Size of the disk image in MiB")
     parser.add_argument("-t", "--tmpdir", help="Temporary directory to store working files")
+    parser.add_argument("--noclean", action="store_true", help="Don't clean up intermediate and temp files")
     args = parser.parse_args()
 
     # Sanity check of required arguments
@@ -177,7 +178,8 @@ def main():
             '-monitor', 'none', '-nographic', '-sd', outimg])
 
     # Delete the working directory.
-    shutil.rmtree(args.tmpdir)
+    if 'noclean' not in args:
+        shutil.rmtree(args.tmpdir)
 
 if __name__=="__main__":
     main()
